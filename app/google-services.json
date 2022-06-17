@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "9871738566",
+    "project_id": "casa-por-temporada-63ba7",
+    "storage_bucket": "casa-por-temporada-63ba7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9871738566:android:01486d8ae911deb54d79c7",
+        "android_client_info": {
+          "package_name": "com.example.casa_por_temporada"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9871738566-gka5ta8vb81sdumqsi1umq8gln51vpve.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.casa_por_temporada",
+            "certificate_hash": "06a3b60c8adc007480b4cc31ff963344fac80961"
+          }
+        },
+        {
+          "client_id": "9871738566-b55ev29m7cs5fppbieus481b2tphnsrp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsgbuN1XpGEZpnwZqWQdXJpQxaj-rb4Eg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9871738566-b55ev29m7cs5fppbieus481b2tphnsrp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
