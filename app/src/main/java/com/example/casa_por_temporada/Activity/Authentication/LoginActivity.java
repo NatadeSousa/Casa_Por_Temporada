@@ -11,7 +11,8 @@ import com.example.casa_por_temporada.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView textCreateAccount;
+    private TextView textCreateAccount, textResetPassword,textMainToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,15 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, CreateAccountActivity.class));
         });
 
+        textResetPassword.setOnClickListener(view -> {
+            startActivity(new Intent(this,ResetPasswordActivity.class));
+        });
+
     }
     private void referComponents(){
 
         textCreateAccount = findViewById(R.id.text_createAccount);
-
+        textResetPassword = findViewById(R.id.text_resetPassword);
+        textMainToolbar = findViewById(R.id.text_main_toolbar);
     }
 }

@@ -75,15 +75,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Criar Conta"
-                        android:textColor="@color/darkBlue"/>
+                        android:textColor="@color/lightBlue"/>
                     <TextView
-                        android:id="@+id/text_forgotPassword"
+                        android:id="@+id/text_resetPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textAlignment="textEnd"
                         android:text="Esqueceu a senha?"
-                        android:textColor="@color/darkBlue"/>
+                        android:textColor="@color/lightBlue"/>
 
 
                 </LinearLayout>
