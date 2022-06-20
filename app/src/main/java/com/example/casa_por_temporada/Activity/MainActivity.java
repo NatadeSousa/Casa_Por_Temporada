@@ -1,8 +1,10 @@
-package com.example.casa_por_temporada;
+package com.example.casa_por_temporada.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.casa_por_temporada.R;
 
 public class MainActivity extends AppCompatActivity {
 
