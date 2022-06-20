@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Authentication.CreateAccountActivity">
+    tools:context=".Activity.Authentication.CreateAccountActivity"
+    android:background="@color/white">
 
     <include
         android:id="@+id/include"
@@ -41,8 +42,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edit"
                 android:hint="Nome"
+                android:textColorHint="#A6A6A6"
                 android:inputType="textPersonName"
-                android:padding="16dp" />
+                android:padding="16dp"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/edit_email"
@@ -51,6 +54,8 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit"
                 android:hint="E-mail"
+                android:textColorHint="#A6A6A6"
+                android:textColor="@color/black"
                 android:inputType="textEmailAddress"
                 android:padding="16dp" />
 
@@ -61,6 +66,8 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit"
                 android:hint="Telefone"
+                android:textColorHint="#A6A6A6"
+                android:textColor="@color/black"
                 android:inputType="phone"
                 android:padding="16dp" />
 
@@ -71,6 +78,8 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit"
                 android:hint="Senha"
+                android:textColorHint="#A6A6A6"
+                android:textColor="@color/black"
                 android:inputType="textPassword"
                 android:padding="16dp" />
 
