@@ -58,6 +58,7 @@
                     android:padding="16dp" />
 
                 <android.widget.Button
+                    android:id="@+id/btn_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_btn"
@@ -91,6 +92,16 @@
 
                 </LinearLayout>
 
+                <ProgressBar
+                    android:id="@+id/progressBarLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:indeterminateTint="@color/darkBlue"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    />
 
             </LinearLayout>
 
@@ -98,5 +109,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
