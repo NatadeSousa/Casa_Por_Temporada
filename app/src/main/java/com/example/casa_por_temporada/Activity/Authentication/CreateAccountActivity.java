@@ -16,8 +16,6 @@ import com.example.casa_por_temporada.Activity.MainActivity;
 import com.example.casa_por_temporada.Helper.FirebaseHelper;
 import com.example.casa_por_temporada.Model.User;
 import com.example.casa_por_temporada.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -91,7 +89,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 user.registerUserOnDatabase();
                 finish();
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
 
             }else{
                 String error = task.getException().getMessage();
@@ -116,7 +114,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         editPhone = findViewById(R.id.edit_phone);
         progressBarCreateAccount = findViewById(R.id.progressBarCreateAccount);
         btnValidateUserData = findViewById(R.id.btn_validateUserData);
-        btnGetBack = findViewById(R.id.btn_getback);
+        btnGetBack = findViewById(R.id.ib_getback);
     }
     private void configClicks(){
 

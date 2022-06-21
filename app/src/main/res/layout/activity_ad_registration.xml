@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/toolbar_registro"
+        layout="@layout/toolbar_registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,46 +27,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include2">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_photo"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/darkBlue"
                 app:cardCornerRadius="5dp"
-                android:backgroundTint="@color/darkBlue">
+                android:onClick="verifyUserPermission">
 
                 <ImageView
+                    android:id="@+id/img_home"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:src="@drawable/ic_photo"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_photo" />
 
             </androidx.cardview.widget.CardView>
 
             <EditText
+                android:id="@+id/edit_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/bg_edit"
-                android:padding="16dp"
                 android:hint="Título"
+                android:padding="16dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/hintColor"/>
+                android:textColorHint="@color/hintColor" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginHorizontal="24dp"
-                android:background="@drawable/bg_edit"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_edit">
 
                 <EditText
+                    android:id="@+id/edit_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
@@ -89,9 +94,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -99,24 +104,26 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Quartos"
-                        android:textColor="@color/darkBlue"/>
+                        android:textColor="@color/darkBlue" />
+
                     <EditText
+                        android:id="@+id/edit_bedroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/bg_edit"
                         android:hint="Ex: 3"
+                        android:padding="16dp"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/hintColor"
-                        android:padding="16dp"/>
+                        android:textColorHint="@color/hintColor" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -124,16 +131,18 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Banheiros"
-                        android:textColor="@color/darkBlue"/>
+                        android:textColor="@color/darkBlue" />
+
                     <EditText
+                        android:id="@+id/edit_bathroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:padding="16dp"
+                        android:background="@drawable/bg_edit"
                         android:hint="Ex: 2"
-                        android:textColorHint="@color/hintColor"
+                        android:padding="16dp"
                         android:textColor="@color/black"
-                        android:background="@drawable/bg_edit"/>
+                        android:textColorHint="@color/hintColor" />
 
                 </LinearLayout>
 
@@ -148,30 +157,42 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Garagens"
-                        android:textColor="@color/darkBlue"/>
+                        android:textColor="@color/darkBlue" />
+
                     <EditText
+                        android:id="@+id/edit_garage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:background="@drawable/bg_edit"
-                        android:padding="16dp"
                         android:hint="Ex: 1"
-                        android:textColorHint="@color/hintColor"
-                        android:textColor="@color/black"/>
+                        android:padding="16dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/hintColor" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
             <CheckBox
+                android:id="@+id/cb_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:text="Disponível"
-                android:textColor="@color/darkBlue"
                 android:buttonTint="@color/darkBlue"
                 android:checked="true"
-                />
+                android:text="Disponível"
+                android:textColor="@color/darkBlue" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar_add_registration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/darkBlue"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
         </LinearLayout>
 

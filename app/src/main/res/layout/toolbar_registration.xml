@@ -7,7 +7,7 @@
     android:background="@color/darkBlue">
 
     <ImageButton
-        android:id="@+id/btn_getback"
+        android:id="@+id/ib_getback"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_main_toolbar"
+        android:id="@+id/text_registration_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Título"
@@ -32,7 +32,7 @@
         />
 
     <ImageButton
-        android:id="@+id/ib_save"
+        android:id="@+id/ib_save_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"

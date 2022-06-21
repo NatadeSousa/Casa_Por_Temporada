@@ -7,7 +7,7 @@
     android:background="@color/darkBlue">
 
     <ImageButton
-        android:id="@+id/btn_getback"
+        android:id="@+id/ib_getback"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"

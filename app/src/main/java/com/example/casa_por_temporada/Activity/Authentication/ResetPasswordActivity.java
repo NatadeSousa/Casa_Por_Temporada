@@ -89,7 +89,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         btnResetPassword = findViewById(R.id.btn_reset_password);
         textOnToolBar = findViewById(R.id.text_main_toolbar);
-        btnGetBack = findViewById(R.id.btn_getback);
+        btnGetBack = findViewById(R.id.ib_getback);
         editEmail = findViewById(R.id.edit_email);
         progressBarResetPassword = findViewById(R.id.progress_bar_reset_password);
         btnResetPassword = findViewById(R.id.btn_reset_password);

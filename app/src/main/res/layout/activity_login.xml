@@ -43,6 +43,7 @@
                     android:background="@drawable/bg_edit"
                     android:hint="E-mail"
                     android:textColorHint="#A6A6A6"
+                    android:textColor="@color/black"
                     android:inputType="textEmailAddress"
                     android:padding="16dp" />
 
@@ -54,6 +55,7 @@
                     android:layout_marginTop="16dp"
                     android:hint="Password"
                     android:textColorHint="#A6A6A6"
+                    android:textColor="@color/black"
                     android:inputType="textPassword"
                     android:padding="16dp" />
 
