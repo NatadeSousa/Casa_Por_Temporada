@@ -1,10 +1,14 @@
 package com.example.casa_por_temporada.Activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -16,11 +20,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.casa_por_temporada.Helper.FirebaseHelper;
 import com.example.casa_por_temporada.Model.Home;
 import com.example.casa_por_temporada.R;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AdRegistrationActivity extends AppCompatActivity {
@@ -37,6 +45,8 @@ public class AdRegistrationActivity extends AppCompatActivity {
     private String imagePath;
     private Bitmap image;
 
+    private Home home;
+
     //Activity Life Cycles
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +56,29 @@ public class AdRegistrationActivity extends AppCompatActivity {
         configClicks();
         setToolbarTitle();
 
-
     }
     //-----------------------------------------------------------------------------
 
 
+    //Saving add on Realtime Database and on Storage
+    private void saveAddOnDatabases(){
+
+        StorageReference storageReference = FirebaseHelper.getStorageReference()
+                .child("images")
+                .child("adds")
+                .child(home.getId() + ".jpeg");
+
+        UploadTask uploadTask = storageReference.putFile(Uri.parse(imagePath));
+        uploadTask.addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnCompleteListener(task -> {
+
+            String imageUrl = task.getResult().toString();
+            home.setImageUrl(imageUrl);
+
+            home.saveAddOnRealtimeDatabase();
+
+        })).addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
+
+    }
     //Setting home photo
     public void verifyUserPermission(View view) {
 
@@ -62,19 +90,19 @@ public class AdRegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(AdRegistrationActivity.this, "Permissão Negada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdRegistrationActivity.this, "Permissão negada", Toast.LENGTH_SHORT).show();
             }
         };
 
-        showDialogPermissionGallery(permissionListener, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
+        showDialogPermission(permissionListener, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE});
 
     }
-    private void showDialogPermissionGallery(PermissionListener listener, String[] permissions){
+    private void showDialogPermission(PermissionListener listener, String[] permissions){
 
         TedPermission.create()
                 .setPermissionListener(listener)
-                .setDeniedTitle("Permissões")
-                .setDeniedMessage("Você não permitiu o acesso à galeria do dispositivo.\n\nDeseja permitir?")
+                .setDeniedTitle("Permissão")
+                .setDeniedMessage("Você não concedeu acesso à galeria do seu dispositivo.\n\n Deseja permitir?")
                 .setDeniedCloseButtonText("Não")
                 .setGotoSettingButtonText("Configurações")
                 .setPermissions(permissions)
@@ -82,11 +110,40 @@ public class AdRegistrationActivity extends AppCompatActivity {
 
     }
     private void openDeviceGallery(){
-
         Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent,REQUEST_GALLERY);
-
+        startActivityForResult(intent, REQUEST_GALLERY);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == REQUEST_GALLERY){
+
+                Uri pathSelectedImageOnGallery = data.getData();
+                imagePath = pathSelectedImageOnGallery.toString();
+
+                if(Build.VERSION.SDK_INT<28){
+                    try{
+                        image = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), pathSelectedImageOnGallery);
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }else{
+                    ImageDecoder.Source source = ImageDecoder.createSource(getBaseContext().getContentResolver(), pathSelectedImageOnGallery);
+                    try{
+                        image = ImageDecoder.decodeBitmap(source);
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+
+                imgHome.setImageBitmap(image);
+
+            }
+        }
+    }
+
     //-----------------------------------------------------------------------------
 
     //Validating data about the add
@@ -106,7 +163,7 @@ public class AdRegistrationActivity extends AppCompatActivity {
 
                             progressBarAdRegistration.setVisibility(View.VISIBLE);
 
-                            Home home = new Home();
+                            if(home == null) new Home();
                             home.setTitle(title);
                             home.setDescription(description);
                             home.setBedroom(bedroom);
@@ -114,7 +171,13 @@ public class AdRegistrationActivity extends AppCompatActivity {
                             home.setGarage(garage);
                             home.setStatus(cbStatus.isChecked());
 
-                            Toast.makeText(this, "Alright", Toast.LENGTH_SHORT).show();
+                            if(imagePath != null){
+                                saveAddOnDatabases();
+                            }else{
+                                Toast.makeText(this, "Selecione uma imagem para o anúncio!", Toast.LENGTH_SHORT).show();
+                            }
+
+                            finish();
 
                         }else{
                             editGarage.requestFocus();

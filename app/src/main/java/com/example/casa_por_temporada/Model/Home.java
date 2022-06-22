@@ -13,12 +13,31 @@ public class Home {
     private String bathroom;
     private String garage;
     private boolean status;
+    private String imageUrl;
 
     public Home() {
 
         DatabaseReference databaseReference = FirebaseHelper.getDatabaseReference();
         this.setId(databaseReference.push().getKey());
 
+    }
+
+    public void saveAddOnRealtimeDatabase(){
+
+        DatabaseReference databaseReference = FirebaseHelper.getDatabaseReference()
+                .child("adds")
+                .child(FirebaseHelper.getUserIdOnDatabase())
+                .child(this.getId());
+            databaseReference.setValue(this);
+
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getId() {
