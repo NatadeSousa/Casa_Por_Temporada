@@ -4,7 +4,9 @@ import com.example.casa_por_temporada.Helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Home {
+import java.io.Serializable;
+
+public class Home implements Serializable {
 
     private String id;
     private String title;

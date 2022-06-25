@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,13 +29,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class MyAddsActivity extends AppCompatActivity {
+public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.OnClick {
 
     private List<Home> homeList = new ArrayList<>();
     private ProgressBar progressBarMyAddsActivity;
     private TextView textInfo;
     private RecyclerView rvMyAdds;
     private AdapterHomes adapterHomes;
+    private ImageButton ibRegisterAdd;
+
 
     //Activities' life cycle
     @Override
@@ -41,9 +45,18 @@ public class MyAddsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_adds);
         referComponents();
+        setClicks();
         setRecyclerView();
         recoverAddsOnDatabase();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        recoverAddsOnDatabase();
+    }
+
     //--------------------------------------------------------------------------------
 
 
@@ -51,7 +64,7 @@ public class MyAddsActivity extends AppCompatActivity {
     private void setRecyclerView(){
         rvMyAdds.setLayoutManager(new LinearLayoutManager(this));
         rvMyAdds.setHasFixedSize(true);
-        adapterHomes = new AdapterHomes(homeList);
+        adapterHomes = new AdapterHomes(homeList, this);
         rvMyAdds.setAdapter(adapterHomes);
     }
     //--------------------------------------------------------------------------------
@@ -89,13 +102,35 @@ public class MyAddsActivity extends AppCompatActivity {
     }
     //--------------------------------------------------------------------------------
 
+    //Setting clicks on button
+    private void setClicks(){
+
+        ibRegisterAdd.setOnClickListener(view -> {
+
+            startActivity(new Intent(this,AdRegistrationActivity.class));
+
+        });
+
+    }
+    //--------------------------------------------------------------------------------
+
     //Referring components
     private void referComponents(){
 
         textInfo = findViewById(R.id.text_info);
         progressBarMyAddsActivity = findViewById(R.id.progressBarMyAddsActivity);
         rvMyAdds = findViewById(R.id.rv_my_adds);
+        ibRegisterAdd = findViewById(R.id.ib_register_add);
 
+    }
+    //--------------------------------------------------------------------------------
+
+    //Setting click on item list
+    @Override
+    public void onClickListener(Home home) {
+        Intent intent = new Intent(this,AdRegistrationActivity.class);
+        intent.putExtra("home", home);
+        startActivity(intent);
     }
     //--------------------------------------------------------------------------------
 

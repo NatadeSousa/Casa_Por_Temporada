@@ -27,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,8 +54,8 @@ public class AdRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_registration);
         referComponents();
-        configClicks();
-        setToolbarTitle();
+        setClicks();
+        checkUserIntention();
 
     }
     //-----------------------------------------------------------------------------
@@ -62,7 +63,7 @@ public class AdRegistrationActivity extends AppCompatActivity {
 
     //Saving add on Realtime Database and on Storage
     private void saveAddOnDatabases(){
-
+        progressBarAdRegistration.setVisibility(View.VISIBLE);
         StorageReference storageReference = FirebaseHelper.getStorageReference()
                 .child("images")
                 .child("adds")
@@ -76,9 +77,14 @@ public class AdRegistrationActivity extends AppCompatActivity {
 
             home.saveAddOnRealtimeDatabase();
 
-        })).addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show());
+        })).addOnFailureListener(e -> {
+            progressBarAdRegistration.setVisibility(View.GONE);
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        });
 
     }
+    //-----------------------------------------------------------------------------
+
     //Setting home photo
     public void verifyUserPermission(View view) {
 
@@ -143,7 +149,6 @@ public class AdRegistrationActivity extends AppCompatActivity {
             }
         }
     }
-
     //-----------------------------------------------------------------------------
 
     //Validating data about the add
@@ -173,6 +178,8 @@ public class AdRegistrationActivity extends AppCompatActivity {
 
                             if(imagePath != null){
                                 saveAddOnDatabases();
+                            }else if(home.getImageUrl() != null){
+                                home.saveAddOnRealtimeDatabase();
                             }else{
                                 Toast.makeText(this, "Selecione uma imagem para o anúncio!", Toast.LENGTH_SHORT).show();
                             }
@@ -203,19 +210,39 @@ public class AdRegistrationActivity extends AppCompatActivity {
     }
     //-----------------------------------------------------------------------------
 
-    //Setting clicks on buttons
-    private void configClicks(){
+    //Checking if this activity was opened to edit or create a new add
+    private void checkUserIntention(){
 
-        ibGetBack.setOnClickListener(view -> startActivity(new Intent(this,MainActivity.class)));
-        ibSaveAdd.setOnClickListener(view -> validateData());
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            home = (Home) bundle.getSerializable("home");
+            fillComponentsToEdit();
+        }
+
+        fillComponentsToEdit();
 
     }
     //-----------------------------------------------------------------------------
 
-    //Setting title on toolbar
-    private void setToolbarTitle(){
+    //Getting back all the components from MyAddsActivity
+    private void fillComponentsToEdit(){
 
-        toolbarTitle.setText("Novo Anúncio");
+        Picasso.get().load(home.getImageUrl()).into(imgHome);
+        editTitle.setText(home.getTitle());
+        editDescription.setText(home.getDescription());
+        editBedroom.setText(home.getBedroom());
+        editBathroom.setText(home.getBathroom());
+        editGarage.setText(home.getGarage());
+        cbStatus.setChecked(home.isStatus());
+
+    }
+    //-----------------------------------------------------------------------------
+
+    //Setting clicks on buttons
+    private void setClicks(){
+
+        ibGetBack.setOnClickListener(view -> startActivity(new Intent(this,MainActivity.class)));
+        ibSaveAdd.setOnClickListener(view -> validateData());
 
     }
     //-----------------------------------------------------------------------------

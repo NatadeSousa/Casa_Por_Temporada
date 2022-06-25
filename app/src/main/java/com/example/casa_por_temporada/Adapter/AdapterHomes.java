@@ -19,9 +19,11 @@ import java.util.List;
 public class AdapterHomes extends RecyclerView.Adapter<AdapterHomes.MyViewHolder>{
 
     private List<Home> homeList;
+    private OnClick onClick;
 
-    public AdapterHomes(List<Home> homeList) {
+    public AdapterHomes(List<Home> homeList, OnClick onClick) {
         this.homeList = homeList;
+        this.onClick = onClick;
     }
 
     @NonNull
@@ -41,11 +43,17 @@ public class AdapterHomes extends RecyclerView.Adapter<AdapterHomes.MyViewHolder
         holder.textDescription.setText(home.getDescription());
         holder.textDate.setText("");
 
+        holder.itemView.setOnClickListener(view -> onClick.onClickListener(home));
+
     }
 
     @Override
     public int getItemCount() {
         return homeList.size();
+    }
+
+    public interface OnClick{
+        public void onClickListener(Home home);
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder{
