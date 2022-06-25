@@ -55,7 +55,13 @@ public class AdRegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ad_registration);
         referComponents();
         setClicks();
-        checkUserIntention();
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            home = (Home) bundle.getSerializable("home");
+            fillComponentsToEdit();
+        }
+
 
     }
     //-----------------------------------------------------------------------------
@@ -76,6 +82,8 @@ public class AdRegistrationActivity extends AppCompatActivity {
             home.setImageUrl(imageUrl);
 
             home.saveAddOnRealtimeDatabase();
+
+            finish();
 
         })).addOnFailureListener(e -> {
             progressBarAdRegistration.setVisibility(View.GONE);
@@ -168,7 +176,7 @@ public class AdRegistrationActivity extends AppCompatActivity {
 
                             progressBarAdRegistration.setVisibility(View.VISIBLE);
 
-                            if(home == null) new Home();
+                            if(home == null) home = new Home();
                             home.setTitle(title);
                             home.setDescription(description);
                             home.setBedroom(bedroom);
@@ -180,11 +188,10 @@ public class AdRegistrationActivity extends AppCompatActivity {
                                 saveAddOnDatabases();
                             }else if(home.getImageUrl() != null){
                                 home.saveAddOnRealtimeDatabase();
+                                finish();
                             }else{
                                 Toast.makeText(this, "Selecione uma imagem para o anúncio!", Toast.LENGTH_SHORT).show();
                             }
-
-                            finish();
 
                         }else{
                             editGarage.requestFocus();
@@ -206,20 +213,6 @@ public class AdRegistrationActivity extends AppCompatActivity {
             editTitle.requestFocus();
             editTitle.setError("Campo obrigatório!");
         }
-
-    }
-    //-----------------------------------------------------------------------------
-
-    //Checking if this activity was opened to edit or create a new add
-    private void checkUserIntention(){
-
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            home = (Home) bundle.getSerializable("home");
-            fillComponentsToEdit();
-        }
-
-        fillComponentsToEdit();
 
     }
     //-----------------------------------------------------------------------------

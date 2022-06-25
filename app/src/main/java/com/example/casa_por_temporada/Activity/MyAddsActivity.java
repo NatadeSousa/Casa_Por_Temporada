@@ -1,6 +1,7 @@
 package com.example.casa_por_temporada.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
+import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,11 +36,12 @@ import java.util.List;
 public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.OnClick {
 
     private List<Home> homeList = new ArrayList<>();
-    private ProgressBar progressBarMyAddsActivity;
+    private ProgressBar progressBarMyAddsActivity ;
     private TextView textInfo;
-    private RecyclerView rvMyAdds;
+    private SwipeableRecyclerView rvMyAdds;
     private AdapterHomes adapterHomes;
-    private ImageButton ibRegisterAdd;
+    private ImageButton ibRegisterAdd,ibGetBack;
+    private ImageView imgHome;
 
 
     //Activities' life cycle
@@ -47,7 +52,6 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
         referComponents();
         setClicks();
         setRecyclerView();
-        recoverAddsOnDatabase();
     }
 
     @Override
@@ -66,8 +70,39 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
         rvMyAdds.setHasFixedSize(true);
         adapterHomes = new AdapterHomes(homeList, this);
         rvMyAdds.setAdapter(adapterHomes);
+
+        rvMyAdds.setListener(new SwipeLeftRightCallback.Listener() {
+            @Override
+            public void onSwipedLeft(int position) {
+            }
+
+            @Override
+            public void onSwipedRight(int position) {
+                showDialogDelete();
+            }
+        });
+
+
     }
     //--------------------------------------------------------------------------------
+
+    private void showDialogDelete(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmar exclusão");
+        builder.setMessage("Deseja realmente excluir o anúncio?");
+        builder.setNegativeButton("Não", ((dialog, which) -> {
+            dialog.dismiss();
+            adapterHomes.notifyDataSetChanged();
+        }));
+        builder.setPositiveButton("Excluir", ((dialog, which) -> {
+            dialog.dismiss();
+        }));
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
 
     //Recovering adds from Database
     private void recoverAddsOnDatabase(){
@@ -79,11 +114,11 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
                         homeList.clear();
-                        textInfo.setVisibility(View.GONE);
                         for(DataSnapshot snap : snapshot.getChildren()){
                             Home home = snap.getValue(Home.class);
                             homeList.add(home);
                         }
+                        textInfo.setVisibility(View.GONE);
                     }else{
                         textInfo.setText("Nenhum anúncio registrado");
                     }
@@ -105,22 +140,15 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
     //Setting clicks on button
     private void setClicks(){
 
+        ibGetBack.setOnClickListener(view -> {
+            startActivity(new Intent(this, MainActivity.class));
+        });
+
         ibRegisterAdd.setOnClickListener(view -> {
 
             startActivity(new Intent(this,AdRegistrationActivity.class));
 
         });
-
-    }
-    //--------------------------------------------------------------------------------
-
-    //Referring components
-    private void referComponents(){
-
-        textInfo = findViewById(R.id.text_info);
-        progressBarMyAddsActivity = findViewById(R.id.progressBarMyAddsActivity);
-        rvMyAdds = findViewById(R.id.rv_my_adds);
-        ibRegisterAdd = findViewById(R.id.ib_register_add);
 
     }
     //--------------------------------------------------------------------------------
@@ -133,5 +161,20 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
         startActivity(intent);
     }
     //--------------------------------------------------------------------------------
+
+    //Referring components
+    private void referComponents(){
+
+        textInfo = findViewById(R.id.text_info);
+        progressBarMyAddsActivity = findViewById(R.id.progressBarMyAddsActivity);
+        rvMyAdds = findViewById(R.id.rv_my_adds);
+        ibRegisterAdd = findViewById(R.id.ib_register_add);
+        ibGetBack = findViewById(R.id.ib_getback);
+        imgHome = findViewById(R.id.img_home);
+
+    }
+    //--------------------------------------------------------------------------------
+
+
 
 }

@@ -16,13 +16,13 @@
         android:theme="@style/Theme.Casa_Por_Temporada"
         tools:targetApi="31">
         <activity
-            android:name=".MyProfileActivity"
+            android:name=".Activity.MyProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MyAddsActivity"
+            android:name=".Activity.MyAddsActivity"
             android:exported="false" />
         <activity
-            android:name=".FilterActivity"
+            android:name=".Activity.FilterActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.AdRegistrationActivity"

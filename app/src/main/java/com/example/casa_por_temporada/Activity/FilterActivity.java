@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.casa_por_temporada.R;
+
 public class FilterActivity extends AppCompatActivity {
 
     @Override
