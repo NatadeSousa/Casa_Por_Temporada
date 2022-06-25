@@ -78,7 +78,7 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
 
             @Override
             public void onSwipedRight(int position) {
-                showDialogDelete();
+                showDialogDelete(position);
             }
         });
 
@@ -86,16 +86,19 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
     }
     //--------------------------------------------------------------------------------
 
-    private void showDialogDelete(){
+    //Setting text dialog that will appear when user delete add
+    private void showDialogDelete(int pos){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmar exclusão");
         builder.setMessage("Deseja realmente excluir o anúncio?");
         builder.setNegativeButton("Não", ((dialog, which) -> {
-            dialog.dismiss();
             adapterHomes.notifyDataSetChanged();
+            dialog.dismiss();
         }));
         builder.setPositiveButton("Excluir", ((dialog, which) -> {
+            homeList.get(pos).deleteAddOnDatabases();
+            adapterHomes.notifyItemRemoved(pos);
             dialog.dismiss();
         }));
 
@@ -103,6 +106,7 @@ public class MyAddsActivity extends AppCompatActivity implements AdapterHomes.On
         dialog.show();
 
     }
+    //--------------------------------------------------------------------------------
 
     //Recovering adds from Database
     private void recoverAddsOnDatabase(){

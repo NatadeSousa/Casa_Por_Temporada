@@ -1,8 +1,11 @@
 package com.example.casa_por_temporada.Model;
 
+import android.widget.Toast;
+
 import com.example.casa_por_temporada.Helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 
@@ -24,14 +27,32 @@ public class Home implements Serializable {
 
     }
 
-    public void saveAddOnRealtimeDatabase(){
+    public void saveAddOnRealtimeDatabase() {
 
         DatabaseReference databaseReference = FirebaseHelper.getDatabaseReference()
                 .child("adds")
                 .child(FirebaseHelper.getUserIdOnDatabase())
                 .child(this.getId());
-            databaseReference.setValue(this);
+        databaseReference.setValue(this);
 
+
+    }
+
+    public void deleteAddOnDatabases() {
+
+        DatabaseReference databaseReference = FirebaseHelper.getDatabaseReference()
+                .child("adds")
+                .child(FirebaseHelper.getUserIdOnDatabase())
+                .child(this.getId());
+            databaseReference.removeValue().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    StorageReference storageReference = FirebaseHelper.getStorageReference()
+                            .child("images")
+                            .child("adds")
+                            .child(this.getId() + ".jpeg");
+                        storageReference.delete();
+                }
+            });
 
     }
 
