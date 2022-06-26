@@ -177,6 +177,7 @@ public class AdRegistrationActivity extends AppCompatActivity {
                             progressBarAdRegistration.setVisibility(View.VISIBLE);
 
                             if(home == null) home = new Home();
+                            home.setUserId(FirebaseHelper.getUserIdOnDatabase());
                             home.setTitle(title);
                             home.setDescription(description);
                             home.setBedroom(bedroom);

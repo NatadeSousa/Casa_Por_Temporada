@@ -17,18 +17,19 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton ibMore;
 
+    //Activity Life Cycles
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         referComponents();
-        configClicks();
+        setClicks();
 
 
     }
 
-
-    private void configClicks(){
+    //Setting clicks on buttons
+    private void setClicks(){
 
         ibMore.setOnClickListener(view -> {
 
@@ -58,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    //--------------------------------------------------------------------------------
 
+    //Showing text dialog whether user isn't logged in his account
     private void showDialogLogin(){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -74,10 +77,13 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
 
     }
+    //--------------------------------------------------------------------------------
 
+    //Referring components
     private void referComponents(){
 
         ibMore = findViewById(R.id.ib_more);
 
     }
+    //--------------------------------------------------------------------------------
 }
