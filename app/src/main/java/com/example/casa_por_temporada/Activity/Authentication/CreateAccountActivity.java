@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.casa_por_temporada.Activity.MainActivity;
 import com.example.casa_por_temporada.Helper.FirebaseHelper;
 import com.example.casa_por_temporada.Model.User;
 import com.example.casa_por_temporada.R;
@@ -107,7 +106,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     }
     private void referComponents(){
-        textMainToolbar = findViewById(R.id.text_main_toolbar);
+        textMainToolbar = findViewById(R.id.text_getback_toolbar);
         editEmail = findViewById(R.id.edit_email);
         editName = findViewById(R.id.edit_name);
         editPassword = findViewById(R.id.edit_password);

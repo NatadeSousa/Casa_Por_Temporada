@@ -36,6 +36,10 @@ public class Home implements Serializable {
                 .child(this.getId());
         databaseReference.setValue(this);
 
+        DatabaseReference reference = FirebaseHelper.getDatabaseReference()
+                .child("public_adds")
+                .child(this.getId());
+        reference.setValue(this);
 
     }
 

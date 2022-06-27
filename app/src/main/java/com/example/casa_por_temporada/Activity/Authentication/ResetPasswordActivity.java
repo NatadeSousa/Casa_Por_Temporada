@@ -88,7 +88,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private void referComponents(){
 
         btnResetPassword = findViewById(R.id.btn_reset_password);
-        textOnToolBar = findViewById(R.id.text_main_toolbar);
+        textOnToolBar = findViewById(R.id.text_getback_toolbar);
         btnGetBack = findViewById(R.id.ib_getback);
         editEmail = findViewById(R.id.edit_email);
         progressBarResetPassword = findViewById(R.id.progress_bar_reset_password);

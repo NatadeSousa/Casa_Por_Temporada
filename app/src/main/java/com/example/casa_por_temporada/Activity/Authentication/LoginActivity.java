@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
         textCreateAccount = findViewById(R.id.text_createAccount);
         textResetPassword = findViewById(R.id.text_resetPassword);
-        textMainToolbar = findViewById(R.id.text_main_toolbar);
+        textMainToolbar = findViewById(R.id.text_getback_toolbar);
         progressBarLogin = findViewById(R.id.progressBarLogin);
         editEmail = findViewById(R.id.edit_email);
         editPassword = findViewById(R.id.edit_password);

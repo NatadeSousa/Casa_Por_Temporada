@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Activity.FilterActivity">
 
+    <include layout="@layout/toolbar_getback"/>
+
+    
+
 </androidx.constraintlayout.widget.ConstraintLayout>

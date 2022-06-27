@@ -9,7 +9,10 @@
 
     <include
         android:id="@+id/include5"
-        layout="@layout/toolbar_getback" />
+        layout="@layout/toolbar_getback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,6 +31,7 @@
                 android:id="@+id/img_home"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+                android:scaleType="centerCrop"
                 android:background="#909090"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -152,6 +156,7 @@
             </LinearLayout>
 
             <android.widget.Button
+                android:id="@+id/btn_call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
