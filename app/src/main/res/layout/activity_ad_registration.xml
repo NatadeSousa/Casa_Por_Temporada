@@ -109,7 +109,7 @@
                         android:textColor="@color/darkBlue" />
 
                     <EditText
-                        android:id="@+id/edit_bedroom"
+                        android:id="@+id/text_bedroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -136,7 +136,7 @@
                         android:textColor="@color/darkBlue" />
 
                     <EditText
-                        android:id="@+id/edit_bathroom"
+                        android:id="@+id/text_bathroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -163,7 +163,7 @@
                         android:textColor="@color/darkBlue" />
 
                     <EditText
-                        android:id="@+id/edit_garage"
+                        android:id="@+id/text_garage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

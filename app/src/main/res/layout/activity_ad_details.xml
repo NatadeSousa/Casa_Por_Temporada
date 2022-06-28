@@ -86,8 +86,8 @@
                         android:text="Quartos"
                         android:textColor="@color/darkBlue" />
 
-                    <EditText
-                        android:id="@+id/edit_bedroom"
+                    <TextView
+                        android:id="@+id/text_bedroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -113,8 +113,8 @@
                         android:text="Banheiros"
                         android:textColor="@color/darkBlue" />
 
-                    <EditText
-                        android:id="@+id/edit_bathroom"
+                    <TextView
+                        android:id="@+id/text_bathroom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -140,8 +140,8 @@
                         android:text="Garagens"
                         android:textColor="@color/darkBlue" />
 
-                    <EditText
-                        android:id="@+id/edit_garage"
+                    <TextView
+                        android:id="@+id/text_garage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"

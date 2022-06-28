@@ -27,7 +27,7 @@ public class AdDetailsActivity extends AppCompatActivity {
 
     private ImageView imgHome;
     private TextView textTitle,textDescription,textToolbar;
-    private EditText editBedroom,editBathroom,editGarage;
+    private TextView textBedroom,textBathroom,textGarage;
     private Button btnCall;
     private ImageButton ibGetBack;
     private Home home;
@@ -84,9 +84,9 @@ public class AdDetailsActivity extends AppCompatActivity {
             Picasso.get().load(home.getImageUrl()).into(imgHome);
             textTitle.setText(home.getTitle());
             textDescription.setText(home.getDescription());
-            editBedroom.setText(home.getBedroom());
-            editBathroom.setText(home.getBathroom());
-            editGarage.setText(home.getGarage());
+            textBedroom.setText(home.getBedroom());
+            textBathroom.setText(home.getBathroom());
+            textGarage.setText(home.getGarage());
         }else{
             Toast.makeText(this, "Não foi possível recuperar os dados", Toast.LENGTH_SHORT).show();
         }
@@ -126,9 +126,9 @@ public class AdDetailsActivity extends AppCompatActivity {
         textToolbar = findViewById(R.id.text_getback_toolbar);
         textTitle = findViewById(R.id.text_title);
         textDescription = findViewById(R.id.text_description);
-        editBedroom = findViewById(R.id.edit_bedroom);
-        editBathroom = findViewById(R.id.edit_bathroom);
-        editGarage = findViewById(R.id.edit_garage);
+        textBedroom = findViewById(R.id.text_bedroom);
+        textBathroom = findViewById(R.id.text_bathroom);
+        textGarage = findViewById(R.id.text_garage);
         btnCall = findViewById(R.id.btn_call);
         ibGetBack = findViewById(R.id.ib_getback);
 

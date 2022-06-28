@@ -1,6 +1,7 @@
 package com.example.casa_por_temporada.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.casa_por_temporada.Activity.Authentication.LoginActivity;
 import com.example.casa_por_temporada.Adapter.AdapterHomes;
 import com.example.casa_por_temporada.Helper.FirebaseHelper;
+import com.example.casa_por_temporada.Model.FilterHomes;
 import com.example.casa_por_temporada.Model.Home;
 import com.example.casa_por_temporada.R;
 import com.google.firebase.database.DataSnapshot;
@@ -31,12 +33,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterHomes.OnClick {
 
+    private final int REQUEST_FILTER = 10;
+
     private RecyclerView rvAllAdds;
     private AdapterHomes adapterHomes;
     private List<Home> homeList = new ArrayList<>();
     private ImageButton ibMore;
     private ProgressBar progressBarMainActivity;
     private TextView textInfo;
+    private FilterHomes filterHomes;
 
     //Activity Life Cycles
     @Override
@@ -45,16 +50,9 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
         setContentView(R.layout.activity_main);
         referComponents();
         setClicks();
-
-
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         setAdapterHomes();
         recoverAdds();
+
     }
 
     //--------------------------------------------------------------------------------
@@ -91,6 +89,53 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
     }
     //--------------------------------------------------------------------------------
 
+    //Recovering just filtered adds from database
+    private void recoverFilteredAdds(){
+        DatabaseReference databaseReference = FirebaseHelper.getDatabaseReference()
+                .child("public_adds");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+                    homeList.clear();
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        Home home = snap.getValue(Home.class);
+
+                        int bedroom = Integer.parseInt(home.getBedroom());
+                        int bathroom = Integer.parseInt(home.getBathroom());
+                        int garage = Integer.parseInt(home.getGarage());
+
+                        if (bedroom >= filterHomes.getQtt_bedrooms() ||
+                                bathroom >= filterHomes.getQtt_bathrooms() ||
+                                garage >= filterHomes.getQtt_garages()) {
+                            homeList.add(home);
+                        }
+                    }
+
+                    if (homeList.size() == 0) {
+                        textInfo.setText("Nenhum anúncio encontrado");
+                    }else{
+                        textInfo.setVisibility(View.GONE);
+                    }
+
+                    progressBarMainActivity.setVisibility(View.GONE);
+                    Collections.reverse(homeList);
+                    adapterHomes.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+    }
+    //--------------------------------------------------------------------------------
+
     //Setting adapter
     private void setAdapterHomes(){
         rvAllAdds.setLayoutManager(new LinearLayoutManager(this));
@@ -111,7 +156,9 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
             popupMenu.setOnMenuItemClickListener(menuItem -> {
 
                 if(menuItem.getItemId() == R.id.item_filter){
-                    startActivity(new Intent(this,FilterActivity.class));
+                    Intent intent = new Intent(this,FilterActivity.class);
+                    intent.putExtra("filterHomes", intent);
+                    startActivityForResult(intent,REQUEST_FILTER);
                 }else if(menuItem.getItemId() == R.id.item_adds){
                     if(FirebaseHelper.isUserAuthenticated()) {
                         startActivity(new Intent(this,MyAddsActivity.class));
@@ -151,15 +198,23 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
     }
     //--------------------------------------------------------------------------------
 
-    //Referring components
-    private void referComponents(){
+    //Recovering filters from FilterActivity and showing only the appropriate adds
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == REQUEST_FILTER){
 
-        ibMore = findViewById(R.id.ib_more);
-        textInfo = findViewById(R.id.text_info);
-        progressBarMainActivity = findViewById(R.id.progressBarMyAddsActivity);
-        rvAllAdds = findViewById(R.id.rv_all_adds);
-
+                filterHomes = (FilterHomes) data.getSerializableExtra("filterHomes");
+                if(filterHomes.getQtt_bedrooms() > 0 || filterHomes.getQtt_bathrooms() > 0 || filterHomes.getQtt_garages() > 0){
+                    recoverFilteredAdds();
+                }
+            }
+        }else{
+            recoverAdds();
+        }
     }
+
     //--------------------------------------------------------------------------------
 
     //Setting clicks on list items
@@ -169,6 +224,17 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
         Intent intent = new Intent(this,AdDetailsActivity.class);
         intent.putExtra("home", home);
         startActivity(intent);
+
+    }
+    //--------------------------------------------------------------------------------
+
+    //Referring components
+    private void referComponents(){
+
+        ibMore = findViewById(R.id.ib_more);
+        textInfo = findViewById(R.id.text_info);
+        progressBarMainActivity = findViewById(R.id.progressBarMyAddsActivity);
+        rvAllAdds = findViewById(R.id.rv_all_adds);
 
     }
     //--------------------------------------------------------------------------------

@@ -247,9 +247,9 @@ public class AdRegistrationActivity extends AppCompatActivity {
         toolbarTitle = findViewById(R.id.text_registration_toolbar);
         editTitle = findViewById(R.id.edit_title);
         editDescription = findViewById(R.id.edit_description);
-        editBedroom = findViewById(R.id.edit_bedroom);
-        editBathroom = findViewById(R.id.edit_bathroom);
-        editGarage = findViewById(R.id.edit_garage);
+        editBedroom = findViewById(R.id.text_bedroom);
+        editBathroom = findViewById(R.id.text_bathroom);
+        editGarage = findViewById(R.id.text_garage);
         cbStatus = findViewById(R.id.cb_status);
         ibGetBack = findViewById(R.id.ib_getback);
         ibSaveAdd = findViewById(R.id.ib_save_add);
