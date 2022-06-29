@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Casa_Por_Temporada"
         tools:targetApi="31">
         <activity
-            android:name=".AdDetailsActivity"
+            android:name=".Activity.AdDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MyProfileActivity"
@@ -29,13 +29,9 @@
             android:exported="false" />
         <activity
             android:name=".Activity.AdRegistrationActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Helper.FirebaseHelper"
@@ -51,12 +47,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.Authentication.LoginActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

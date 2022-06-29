@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/img_btnGetBack"
+                android:id="@+id/ib_get_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -83,7 +83,7 @@
                         android:text="Criar Conta"
                         android:textColor="@color/lightBlue"/>
                     <TextView
-                        android:id="@+id/text_resetPassword"
+                        android:id="@+id/text_reset_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

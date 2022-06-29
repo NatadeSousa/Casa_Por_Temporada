@@ -4,20 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/drawable/ic_delete.xml" value="0.2075" />
+        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_ad_details.xml" value="0.2" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_ad_registration.xml" value="0.1956521739130435" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_create_account.xml" value="0.1956521739130435" />
-        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_filter.xml" value="0.1671195652173913" />
+        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_filter.xml" value="0.33" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_login.xml" value="0.1956521739130435" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_main.xml" value="0.1956521739130435" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_my_adds.xml" value="0.1671195652173913" />
-        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_my_profile.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_my_profile.xml" value="0.25" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/activity_reset_password.xml" value="0.25" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/item_add.xml" value="0.33" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/toolbar_adds_activity.xml" value="0.19429347826086957" />
+        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/toolbar_getback.xml" value="0.10052083333333334" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/toolbar_main.xml" value="0.1956521739130435" />
+        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/toolbar_main_activity.xml" value="0.24954710144927536" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/toolbar_registration.xml" value="0.1956521739130435" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/toolbar_registration_activity.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/layout/toolbar_registro.xml" value="0.1956521739130435" />
+        <entry key="..\:/Users/Ins1ghtful/Documents/Estudos/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/menu/menu_main_activity.xml" value="0.33" />
         <entry key="..\:/Users/natan/Documents/Studies/Cursos/Programming/Mobile Development/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/drawable/bg_btn.xml" value="0.1955" />
         <entry key="..\:/Users/natan/Documents/Studies/Cursos/Programming/Mobile Development/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/drawable/bg_edit.xml" value="0.2105" />
         <entry key="..\:/Users/natan/Documents/Studies/Cursos/Programming/Mobile Development/Projects_GitHub/Casa_Por_Temporada/app/src/main/res/drawable/ic_getback.xml" value="0.2115" />

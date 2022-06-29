@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
     private List<Home> homeList = new ArrayList<>();
     private ImageButton ibMore;
     private ProgressBar progressBarMainActivity;
-    private TextView textInfo;
+    private TextView textInfoMain;
     private FilterHomes filterHomes;
 
     //Activity Life Cycles
@@ -68,13 +68,13 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
 
                     if(snapshot.exists()){
                         homeList.clear();
-                        textInfo.setVisibility(View.GONE);
+                        textInfoMain.setVisibility(View.GONE);
                         for(DataSnapshot snap : snapshot.getChildren()){
                             Home home = snap.getValue(Home.class);
                             homeList.add(home);
                         }
                     }else{
-                        textInfo.setText("Nenhum anúncio foi registrado");
+                        textInfoMain.setText("Nenhum anúncio foi registrado");
                     }
                     progressBarMainActivity.setVisibility(View.GONE);
                     Collections.reverse(homeList);
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
 
     //Recovering just filtered adds from database
     private void recoverFilteredAdds(){
+        homeList.clear();
         DatabaseReference databaseReference = FirebaseHelper.getDatabaseReference()
                 .child("public_adds");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -106,24 +107,25 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
                         int bathroom = Integer.parseInt(home.getBathroom());
                         int garage = Integer.parseInt(home.getGarage());
 
-                        if (bedroom >= filterHomes.getQtt_bedrooms() ||
-                                bathroom >= filterHomes.getQtt_bathrooms() ||
+                        if (bedroom >= filterHomes.getQtt_bedrooms() &&
+                                bathroom >= filterHomes.getQtt_bathrooms() &&
                                 garage >= filterHomes.getQtt_garages()) {
                             homeList.add(home);
                         }
                     }
-
-                    if (homeList.size() == 0) {
-                        textInfo.setText("Nenhum anúncio encontrado");
-                    }else{
-                        textInfo.setVisibility(View.GONE);
-                    }
-
-                    progressBarMainActivity.setVisibility(View.GONE);
-                    Collections.reverse(homeList);
-                    adapterHomes.notifyDataSetChanged();
-
                 }
+
+                if(homeList.size() == 0) {
+                    textInfoMain.setText("Nenhum anúncio encontrado");
+                    textInfoMain.setVisibility(View.VISIBLE);
+                }else{
+                    textInfoMain.setVisibility(View.GONE);
+                }
+
+                progressBarMainActivity.setVisibility(View.GONE);
+                Collections.reverse(homeList);
+                adapterHomes.notifyDataSetChanged();
+
             }
 
             @Override
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
 
                 if(menuItem.getItemId() == R.id.item_filter){
                     Intent intent = new Intent(this,FilterActivity.class);
-                    intent.putExtra("filterHomes", intent);
+                    intent.putExtra("filterHomes", filterHomes);
                     startActivityForResult(intent,REQUEST_FILTER);
                 }else if(menuItem.getItemId() == R.id.item_adds){
                     if(FirebaseHelper.isUserAuthenticated()) {
@@ -232,8 +234,8 @@ public class MainActivity extends AppCompatActivity implements AdapterHomes.OnCl
     private void referComponents(){
 
         ibMore = findViewById(R.id.ib_more);
-        textInfo = findViewById(R.id.text_info);
-        progressBarMainActivity = findViewById(R.id.progressBarMyAddsActivity);
+        textInfoMain = findViewById(R.id.text_info_main);
+        progressBarMainActivity = findViewById(R.id.progressBarMainActivity);
         rvAllAdds = findViewById(R.id.rv_all_adds);
 
     }

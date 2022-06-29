@@ -120,7 +120,7 @@ public class FilterActivity extends AppCompatActivity {
         sbBathroom.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textGarage.setText(progress + " quartos ou mais");
+                textBathroom.setText(progress + " quartos ou mais");
                 qtt_bathrooms = progress;
             }
 

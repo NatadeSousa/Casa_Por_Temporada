@@ -49,16 +49,28 @@ public class Home implements Serializable {
                 .child("adds")
                 .child(FirebaseHelper.getUserIdOnDatabase())
                 .child(this.getId());
-            databaseReference.removeValue().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    StorageReference storageReference = FirebaseHelper.getStorageReference()
-                            .child("images")
-                            .child("adds")
-                            .child(this.getId() + ".jpeg");
-                        storageReference.delete();
-                }
-            });
+        databaseReference.removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                StorageReference storageReference = FirebaseHelper.getStorageReference()
+                        .child("images")
+                        .child("adds")
+                        .child(this.getId() + ".jpeg");
+                storageReference.delete();
+            }
+        });
 
+        DatabaseReference reference = FirebaseHelper.getDatabaseReference()
+                .child("public_adds")
+                .child(this.getId());
+        reference.removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                StorageReference storageReference = FirebaseHelper.getStorageReference()
+                        .child("images")
+                        .child("adds")
+                        .child(this.getId() + ".jpeg");
+                storageReference.delete();
+            }
+        });
     }
 
     public String getImageUrl() {

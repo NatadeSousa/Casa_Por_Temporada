@@ -72,7 +72,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private void configClicks(){
 
         btnGetBack.setOnClickListener(view -> {
-            startActivity(new Intent(this,LoginActivity.class));
+            finish();
         });
 
         btnResetPassword.setOnClickListener(view -> {

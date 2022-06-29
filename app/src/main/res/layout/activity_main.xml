@@ -42,10 +42,11 @@
             android:indeterminateTint="@color/darkBlue" />
 
         <TextView
-            android:id="@+id/text_info"
+            android:id="@+id/text_info_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Carregando anúncios..." />
+            android:text="Carregando anúncios..."
+            android:textColor="#808080"/>
 
     </LinearLayout>
 

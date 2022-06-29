@@ -27,15 +27,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/img_home"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardview"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:scaleType="centerCrop"
-                android:background="#909090"
+                android:layout_height="250dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#909090"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/text_title"
@@ -44,10 +54,11 @@
                 android:layout_marginHorizontal="17dp"
                 android:layout_marginTop="24dp"
                 android:text="Casa em frente à praia"
+                android:textColor="#808080"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_home" />
+                app:layout_constraintTop_toBottomOf="@+id/cardview" />
 
             <TextView
                 android:id="@+id/text_description"
@@ -57,6 +68,7 @@
                 android:layout_marginHorizontal="18dp"
                 android:justificationMode="inter_word"
                 android:text="Tem um parque bem ao lado, você pode ouvir o som dos passarinhos nas árvores e não precisa se preocupar com transporte. O melhor apartamento de todos não é o mais chique ou o maior. É aquele que você poderá ter uma vida feliz, realizar seus sonhos e viver momentos fantásticos. Há poucos passos de várias coisas que você precisa."
+                android:textColor="#808080"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_title" />

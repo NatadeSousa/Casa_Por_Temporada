@@ -100,11 +100,26 @@ public class CreateAccountActivity extends AppCompatActivity {
     //-----------------------------------------------------------------------------
 
 
+
+    private void configClicks(){
+
+        btnValidateUserData.setOnClickListener(view -> {
+
+            validateUserData();
+
+        });
+        btnGetBack.setOnClickListener(view -> {
+            finish();
+        });
+
+    }
+
     private void setTextOnToolBar(){
 
         textMainToolbar.setText("Crie sua conta");
 
     }
+
     private void referComponents(){
         textMainToolbar = findViewById(R.id.text_getback_toolbar);
         editEmail = findViewById(R.id.edit_email);
@@ -114,17 +129,5 @@ public class CreateAccountActivity extends AppCompatActivity {
         progressBarCreateAccount = findViewById(R.id.progressBarCreateAccount);
         btnValidateUserData = findViewById(R.id.btn_validateUserData);
         btnGetBack = findViewById(R.id.ib_getback);
-    }
-    private void configClicks(){
-
-        btnValidateUserData.setOnClickListener(view -> {
-
-            validateUserData();
-
-        });
-        btnGetBack.setOnClickListener(view -> {
-            startActivity(new Intent(this,LoginActivity.class));
-        });
-
     }
 }

@@ -62,7 +62,7 @@ public class AdDetailsActivity extends AppCompatActivity {
     //Recovering phone number of home owner
     private void recoverNumber(){
         DatabaseReference databaseReference = FirebaseHelper.getDatabaseReference()
-                .child("users")
+                .child("Users")
                 .child(home.getUserId());
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -104,11 +104,7 @@ public class AdDetailsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Carregando informações, aguarde...", Toast.LENGTH_SHORT).show();
             }
         });
-        ibGetBack.setOnClickListener(view -> {
-
-            startActivity(new Intent(this,MainActivity.class));
-
-        });
+        ibGetBack.setOnClickListener(view -> {finish();});
 
     }
     //--------------------------------------------------------------------------------

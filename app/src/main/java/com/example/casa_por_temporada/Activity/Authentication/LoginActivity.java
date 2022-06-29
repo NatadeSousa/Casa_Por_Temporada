@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editEmail, editPassword;
     private ProgressBar progressBarLogin;
     private Button btnLogin;
+    private ImageButton ibGetBack;
 
     //Activity Life Cycles
     @Override
@@ -90,6 +92,10 @@ public class LoginActivity extends AppCompatActivity {
             validateUserData();
         });
 
+        ibGetBack.setOnClickListener(view -> {
+            finish();
+        });
+
     }
     //-------------------------------------------------------------------------
 
@@ -97,12 +103,13 @@ public class LoginActivity extends AppCompatActivity {
     private void referComponents(){
 
         textCreateAccount = findViewById(R.id.text_createAccount);
-        textResetPassword = findViewById(R.id.text_resetPassword);
+        textResetPassword = findViewById(R.id.text_reset_password);
         textMainToolbar = findViewById(R.id.text_getback_toolbar);
         progressBarLogin = findViewById(R.id.progressBarLogin);
         editEmail = findViewById(R.id.edit_email);
         editPassword = findViewById(R.id.edit_password);
         btnLogin = findViewById(R.id.btn_login);
+        ibGetBack = findViewById(R.id.ib_get_back);
 
     }
     //-------------------------------------------------------------------------
